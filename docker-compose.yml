@@ -1,12 +1,15 @@
 version: '2.1'
 services:
-  rabbitmq377:
+  image:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ${IMAGE_PREFIX:-cirepo}/rabbitmq:${IMAGE_TAG:-3.7.7}
-    container_name: ${INSTANCE_NAME:-rabbitmq377}.${INSTANCE_DOMAIN:-local}
-    hostname: ${INSTANCE_NAME:-rabbitmq377}.${INSTANCE_DOMAIN:-local}
+      args:
+      - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.7.7-management-alpine}
+      - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.7.7}
+    container_name: ${CONTAINER_HOST_NAME:-rabbitmq}
+    hostname: ${CONTAINER_HOST_NAME:-rabbitmq}
+    image: ${IMAGE_PREFIX:-cloudready}/${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
     networks:
       local-network:
         ipv4_address: 172.16.238.124
@@ -16,8 +19,12 @@ services:
     - "${RABBITMQ_5671_PORT:-5671}:5671"
     - "${RABBITMQ_5672_PORT:-5672}:5672"
     - "${RABBITMQ_25672_PORT:-25672}:25672"
+    # management ports
+    - "${RABBITMQ_15671_PORT:-15671}:15671"
+    - "${RABBITMQ_15672_PORT:-15672}:15672"
     volumes:
     - data:/var/lib/rabbitmq
+    - log:/var/log/rabbitmq
 
 networks:
   local-network:
@@ -35,5 +42,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/data
+      device: ${PWD}/data/data
+      o: bind
+  log:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/log
       o: bind
