@@ -1,0 +1,37 @@
+
+addons:
+  apt:
+    packages:
+    - aria2
+#before_install:
+branches:
+  only:
+  - develop
+  - master
+
+dist: trusty
+env:
+#  global:
+  matrix:
+  - IMAGE_ARG_IMAGE_TAG=3.7.7-management         IMAGE_ARG_VERSION=3.7.7
+  - IMAGE_ARG_IMAGE_TAG=3.7.7                    IMAGE_ARG_VERSION=3.7.7
+  - IMAGE_ARG_IMAGE_TAG=3.7.7-management-alpine  IMAGE_ARG_VERSION=3.7.7
+  - IMAGE_ARG_IMAGE_TAG=3.7.7-alpine             IMAGE_ARG_VERSION=3.7.7
+  - IMAGE_ARG_IMAGE_TAG=3.6.16-management        IMAGE_ARG_VERSION=3.6.16
+  - IMAGE_ARG_IMAGE_TAG=3.6.16                   IMAGE_ARG_VERSION=3.6.16
+  - IMAGE_ARG_IMAGE_TAG=3.6.16-management-alpine IMAGE_ARG_VERSION=3.6.16
+  - IMAGE_ARG_IMAGE_TAG=3.6.16-alpine            IMAGE_ARG_VERSION=3.6.16
+
+group: edge
+#install: true
+
+#before_script:
+script:
+- while sleep 9m; do echo "=====[ $SECONDS seconds still running ]====="; done &
+- bash build.sh
+- kill %1
+#after_script:
+
+services:
+- docker
+sudo: required
