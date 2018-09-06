@@ -7,10 +7,6 @@ services:
     container_name: ${CONTAINER_HOST_NAME:-rabbitmq}
     hostname: ${CONTAINER_HOST_NAME:-rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready}/${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
-    networks:
-      local-network:
-        ipv4_address: 172.16.238.124
-        ipv6_address: 2001:3984:3989::124
     ports:
     - "${RABBITMQ_4369_PORT:-4369}:4369"
     - "${RABBITMQ_5671_PORT:-5671}:5671"
@@ -22,17 +18,6 @@ services:
     volumes:
     - data:/var/lib/rabbitmq
     - log:/var/log/rabbitmq
-
-networks:
-  local-network:
-    external: true
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.16.238.0/24
-      - subnet: 2001:3984:3989::/64
 
 volumes:
   data:

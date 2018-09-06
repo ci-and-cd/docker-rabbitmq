@@ -1,0 +1,10 @@
+version: '2.1'
+services:
+  base-rabbitmq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+      - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.7.7-management-alpine}
+      - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.7.7}
+    image: ${IMAGE_PREFIX:-cloudready}/${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
