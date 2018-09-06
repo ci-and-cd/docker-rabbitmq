@@ -6,8 +6,8 @@ services:
       service: base-rabbitmq
     container_name: ${CONTAINER_HOST_NAME:-rabbitmq}
     environment:
-    - RABBITMQ_USER=${RABBITMQ_USER:-admin}
-    - RABBITMQ_PASS=${RABBITMQ_PASS:-admin_pass}
+    - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+    - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin_pass}
     hostname: ${CONTAINER_HOST_NAME:-rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready}/${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
     ports:
