@@ -31,7 +31,7 @@ RUN set -ex \
   && find / -name "rabbitmq-plugins" | xargs ls -la
 
 # debian:stretch-slim  /usr/lib/rabbitmq/bin
-# alpine:3.7           /opt/rabbitmq/sbin
+# alpine:3.8           /opt/rabbitmq/sbin
 ENV PATH /usr/lib/rabbitmq/bin:/opt/rabbitmq/sbin:$PATH
 ENV RABBITMQ_VERSION ${IMAGE_ARG_VERSION:-3.7.7}
 ENV LANG C.UTF-8
