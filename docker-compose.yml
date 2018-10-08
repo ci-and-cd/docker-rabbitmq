@@ -10,7 +10,7 @@ services:
     networks:
       local-network:
         ipv4_address: 172.16.238.124
-        ipv6_address: 2001:3984:3989::124
+        #ipv6_address: 2001:3984:3989::124
     ports:
     - "${RABBITMQ_4369_PORT:-4369}:4369"
     - "${RABBITMQ_5671_PORT:-5671}:5671"
@@ -32,7 +32,7 @@ networks:
       driver: default
       config:
       - subnet: 172.16.238.0/24
-      - subnet: 2001:3984:3989::/64
+      #- subnet: 2001:3984:3989::/64
 
 volumes:
   data:
