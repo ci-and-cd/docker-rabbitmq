@@ -19,6 +19,7 @@ services:
     # management ports
     - "${RABBITMQ_15671_PORT:-15671}:15671"
     - "${RABBITMQ_15672_PORT:-15672}:15672"
+    restart: always
     volumes:
     - data:/var/lib/rabbitmq
     - log:/var/log/rabbitmq
