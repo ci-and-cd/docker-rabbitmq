@@ -4,21 +4,29 @@ services:
     extends:
       file: docker-compose-base.yml
       service: base-rabbitmq
-    container_name: ${CONTAINER_HOST_NAME:-rabbitmq}
-    hostname: ${CONTAINER_HOST_NAME:-rabbitmq}
+    container_name: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
+    hostname: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
+    labels:
+      deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}
+      deploy.config.name: ${LABEL_DEPLOY_CONFIG_NAME:-unknown}
+      deploy.config.ref: ${LABEL_DEPLOY_CONFIG_REF:-unknown}
+      deploy.util.commit: ${LABEL_DEPLOY_UTIL_COMMIT:-unknown}
+      deploy.util.ref: ${LABEL_DEPLOY_UTIL_REF:-unknown}
+      instance.name.short: ${LABEL_INSTANCE_NAME_SHORT:-standalone.rabbitmq}
+      instance.name: ${LABEL_INSTANCE_NAME:-127.0.0.1/rabbitmq/standalone}
     networks:
       local-network:
-        ipv4_address: 172.16.238.124
-        #ipv6_address: 2001:3984:3989::124
+        ipv4_address: ${IPV4_ADDRESS:-172.16.238.124}
+        #ipv6_address: ${IPV6_ADDRESS:-2001:3984:3989::124}
     ports:
-    - "${RABBITMQ_4369_PORT:-4369}:4369"
-    - "${RABBITMQ_5671_PORT:-5671}:5671"
-    - "${RABBITMQ_5672_PORT:-5672}:5672"
-    - "${RABBITMQ_25672_PORT:-25672}:25672"
+    - "${EXTERNAL_RABBITMQ_4369_PORT:-4369}:4369"
+    - "${EXTERNAL_RABBITMQ_5671_PORT:-5671}:5671"
+    - "${EXTERNAL_RABBITMQ_5672_PORT:-5672}:5672"
+    - "${EXTERNAL_RABBITMQ_25672_PORT:-25672}:25672"
     # management ports
-    - "${RABBITMQ_15671_PORT:-15671}:15671"
-    - "${RABBITMQ_15672_PORT:-15672}:15672"
+    - "${EXTERNAL_RABBITMQ_15671_PORT:-15671}:15671"
+    - "${EXTERNAL_RABBITMQ_15672_PORT:-15672}:15672"
     restart: always
     volumes:
     - data:/var/lib/rabbitmq
