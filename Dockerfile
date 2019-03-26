@@ -34,8 +34,27 @@ RUN set -ex \
 # alpine:3.8           /opt/rabbitmq/sbin
 ENV PATH /usr/lib/rabbitmq/bin:/opt/rabbitmq/sbin:$PATH
 ENV RABBITMQ_VERSION ${IMAGE_ARG_VERSION:-3.7.7}
+
+# /opt/rabbitmq/plugins
+ENV RABBITMQ_PLUGINS_DIR /plugins
+
 ENV LANG C.UTF-8
 ENV HOME /var/lib/rabbitmq
+
+
+COPY --chown=rabbitmq docker /
+# see: https://unix.stackexchange.com/questions/2690/how-to-redirect-output-of-wget-as-input-to-unzip
+# BusyBox's unzip can take stdin and extract all the files.
+SHELL ["/bin/bash", "-c"]
+RUN set -ex \
+  && cd ${RABBITMQ_PLUGINS_DIR} \
+  && if [[ ${RABBITMQ_VERSION} =~ ^3\.7\.[0-9]+$ ]]; then \
+       /usr/local/bin/plugins.sh /community_plugins/3.7.txt; \
+     fi \
+  && if [[ ${RABBITMQ_VERSION} =~ ^3\.6\.[0-9]+$ ]]; then \
+       /usr/local/bin/plugins.sh /community_plugins/3.6.txt; \
+     fi
+SHELL ["/bin/sh", "-c"]
 
 VOLUME ["/var/lib/rabbitmq", "/var/log/rabbitmq"]
 

@@ -1,0 +1,13 @@
+
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_lvc_exchange/rabbitmq_lvc_exchange-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_rtopic_exchange/rabbitmq_rtopic_exchange-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_delayed_message_exchange/rabbitmq_delayed_message_exchange-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_routing_node_stamp/rabbitmq_routing_node_stamp-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_message_timestamp/rabbitmq_message_timestamp-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_auth_backend_http/rabbitmq_auth_backend_http-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_auth_backend_amqp/rabbitmq_auth_backend_amqp-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_auth_backend_ip_range/rabbitmq_auth_backend_ip_range-20180116-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_management_exchange/rabbitmq_management_exchange-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_management_themes/rabbitmq_management_themes-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_boot_steps_visualiser/rabbitmq_boot_steps_visualiser-20171215-3.6.x.zip
+https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_email/rabbitmq_email-20171220-3.6.x.zip
