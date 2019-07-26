@@ -4,8 +4,6 @@ services:
     extends:
       file: docker-compose-base.yml
       service: base-rabbitmq
-    container_name: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
-    hostname: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
     labels:
       deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}

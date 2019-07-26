@@ -5,8 +5,18 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-      - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.7.7-management-alpine}
-      - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.7.7}
+        - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.7.7-management-alpine}
+        - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.7.7}
+    container_name: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
+    environment:
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin_pass}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-secret_cookie_here}
+      - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=${RABBITMQ_VM_MEMORY_HIGH_WATERMARK:-0.60}
+      # You cannot use dots in RABBITMQ_NODENAME. This restriction is inherited from Erlang. You can use dashes and underscores.
+      - RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-standalone_rabbitmq}
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=${RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS:-}
+    hostname: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
     labels:
       deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}
@@ -16,4 +26,6 @@ services:
       deploy.util.ref: ${LABEL_DEPLOY_UTIL_REF:-unknown}
       instance.name.short: ${LABEL_INSTANCE_NAME_SHORT:-standalone.rabbitmq}
       instance.name: ${LABEL_INSTANCE_NAME:-127.0.0.1/rabbitmq/standalone}
+    mem_limit: ${RABBITMQ_MEM_LIMIT:-2048m}
+    mem_reservation: ${RABBITMQ_MEM_RESERVATION:-1536m}
     restart: always

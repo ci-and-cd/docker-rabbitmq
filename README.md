@@ -8,3 +8,6 @@ Dockerfile [cloud-ready/docker-rabbitmq on Github](https://github.com/cloud-read
 
 
 [Community plugins](https://www.rabbitmq.com/community-plugins.html)
+
+
+Set `rabbitmq.channel-cache-size` properly.
