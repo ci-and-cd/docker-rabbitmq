@@ -15,7 +15,7 @@ services:
       - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=${RABBITMQ_VM_MEMORY_HIGH_WATERMARK:-0.60}
       # You cannot use dots in RABBITMQ_NODENAME. This restriction is inherited from Erlang. You can use dashes and underscores.
       - RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-standalone_rabbitmq}
-      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=${RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS:-}
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=${RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS:-+A 128}
     hostname: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
     labels:

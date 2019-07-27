@@ -11,3 +11,5 @@ Dockerfile [cloud-ready/docker-rabbitmq on Github](https://github.com/cloud-read
 
 
 Set `rabbitmq.channel-cache-size` properly.
+
+[Production Checklist](https://www.rabbitmq.com/production-checklist.html)
