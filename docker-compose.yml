@@ -4,7 +4,7 @@ services:
     extends:
       file: docker-compose-base.yml
       service: base-rabbitmq
-    image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
+    image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.8.2-management-alpine-SNAPSHOT}
     labels:
       deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}
       deploy.config.name: ${LABEL_DEPLOY_CONFIG_NAME:-unknown}
@@ -27,7 +27,10 @@ services:
     - "${EXTERNAL_RABBITMQ_15672_PORT:-15672}:15672"
     restart: always
     volumes:
-    - data:/var/lib/rabbitmq
+    #- data:/var/lib/rabbitmq
+    - config:/var/lib/rabbitmq/config
+    - mnesia:/var/lib/rabbitmq/mnesia
+    - schema:/var/lib/rabbitmq/schema
     - log:/var/log/rabbitmq
 
 networks:
@@ -42,11 +45,29 @@ networks:
       #- subnet: 2001:3984:3989::/64
 
 volumes:
-  data:
+  #data:
+  #  driver: local
+  #  driver_opts:
+  #    type: none
+  #    device: ${PWD}/data/data
+  #    o: bind
+  config:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/data/data
+      device: ${PWD}/data/data/config
+      o: bind
+  mnesia:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/data/mnesia
+      o: bind
+  schema:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/data/schema
       o: bind
   log:
     driver: local

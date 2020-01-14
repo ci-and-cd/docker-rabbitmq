@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.7.7-management-alpine}
-        - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.7.7}
+        - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.8.2-management-alpine}
+        - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.8.2}
     container_name: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     environment:
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin_pass}
@@ -17,7 +17,7 @@ services:
       - RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-standalone_rabbitmq}
       - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=${RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS:-+A 128}
     hostname: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
-    image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.7.7-management-alpine-SNAPSHOT}
+    image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.8.2-management-alpine-SNAPSHOT}
     labels:
       deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}
       deploy.config.name: ${LABEL_DEPLOY_CONFIG_NAME:-unknown}

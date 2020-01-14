@@ -33,9 +33,9 @@ while read -r spec || [[ -n "${spec}" ]]; do
     fi
 
     if type -p busybox > /dev/null ; then
-        wget -qO- "${plugin}" | busybox unzip -;
+        wget --no-check-certificate -qO- "${plugin}" | busybox unzip -;
     else
-        wget "${plugin}" -O temp.zip; unzip temp.zip; rm -f temp.zip
+        wget --no-check-certificate "${plugin}" -O temp.zip; unzip temp.zip; rm -f temp.zip
     fi
 
     (( COUNT_PLUGINS_INSTALLED += 1 ))

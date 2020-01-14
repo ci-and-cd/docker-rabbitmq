@@ -3,9 +3,6 @@
 
 # But not these files...
 !/.gitignore
-!/.config/.gitignore
-!/.mnesia/.gitignore
-!/.schema/.gitignore
 # etc...
 
 # ...even if they are in subdirectories

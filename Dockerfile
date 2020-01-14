@@ -1,7 +1,7 @@
 
 ARG IMAGE_ARG_IMAGE_TAG
 
-FROM rabbitmq:${IMAGE_ARG_IMAGE_TAG:-3.7.7-management-alpine} as base
+FROM rabbitmq:${IMAGE_ARG_IMAGE_TAG:-3.8.2-management-alpine} as base
 
 # see: https://github.com/docker-library/rabbitmq/blob/4b2b11c59ee65c2a09616b163d4572559a86bb7b/3.7/alpine/management/Dockerfile
 
@@ -33,7 +33,7 @@ RUN set -ex \
 # debian:stretch-slim  /usr/lib/rabbitmq/bin
 # alpine:3.8           /opt/rabbitmq/sbin
 ENV PATH /usr/lib/rabbitmq/bin:/opt/rabbitmq/sbin:$PATH
-ENV RABBITMQ_VERSION ${IMAGE_ARG_VERSION:-3.7.7}
+ENV RABBITMQ_VERSION ${IMAGE_ARG_VERSION:-3.8.2}
 
 # /opt/rabbitmq/plugins
 ENV RABBITMQ_PLUGINS_DIR /plugins
@@ -48,6 +48,9 @@ COPY --chown=rabbitmq docker /
 SHELL ["/bin/bash", "-c"]
 RUN set -ex \
   && cd ${RABBITMQ_PLUGINS_DIR} \
+  && if [[ ${RABBITMQ_VERSION} =~ ^3\.8\.[0-9]+$ ]]; then \
+       /usr/local/bin/plugins.sh /community_plugins/3.8.txt; \
+     fi \
   && if [[ ${RABBITMQ_VERSION} =~ ^3\.7\.[0-9]+$ ]]; then \
        /usr/local/bin/plugins.sh /community_plugins/3.7.txt; \
      fi \
