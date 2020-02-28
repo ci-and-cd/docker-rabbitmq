@@ -10,6 +10,7 @@ docker-compose down -v
 $confirmation = Read-Host "Do you want clear data"
 if ($confirmation -eq "y") {
     Remove-Item -Path "data\data\*" -Exclude ".gitignore", "*.sh" -Recurse;
+    Remove-Item -Path "data\log\*" -Exclude ".gitignore", "*.sh" -Recurse;
 }
 
 docker-compose up -d

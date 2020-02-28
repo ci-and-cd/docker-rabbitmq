@@ -9,13 +9,13 @@ services:
         - IMAGE_ARG_VERSION=${IMAGE_ARG_VERSION:-3.8.2}
     container_name: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     environment:
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin_pass}
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
-      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE:-secret_cookie_here}
-      - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=${RABBITMQ_VM_MEMORY_HIGH_WATERMARK:-0.60}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-admin_pass}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-admin}
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-secret_cookie_here}
+      RABBITMQ_VM_MEMORY_HIGH_WATERMARK: ${RABBITMQ_VM_MEMORY_HIGH_WATERMARK:-0.60}
       # You cannot use dots in RABBITMQ_NODENAME. This restriction is inherited from Erlang. You can use dashes and underscores.
-      - RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-standalone_rabbitmq}
-      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=${RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS:-+A 128}
+      RABBITMQ_NODENAME: ${RABBITMQ_NODENAME:-standalone_rabbitmq}
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '+A 128 -rabbit log [{console,[{enabled,true},{level,info}]}]'#${RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS:-+A 128} TODO How to escape or quote { and } ?
     hostname: ${CONTAINER_HOST_NAME:-standalone.rabbitmq}
     image: ${IMAGE_PREFIX:-cloudready/}${IMAGE_NAME:-rabbitmq}:${IMAGE_TAG:-3.8.2-management-alpine-SNAPSHOT}
     labels:
