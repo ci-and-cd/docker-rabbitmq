@@ -28,9 +28,9 @@ services:
     restart: always
     volumes:
     #- data:/var/lib/rabbitmq
-    - config:/var/lib/rabbitmq/config
-    - mnesia:/var/lib/rabbitmq/mnesia
-    - schema:/var/lib/rabbitmq/schema
+    #- config:/var/lib/rabbitmq/config
+    #- mnesia:/var/lib/rabbitmq/mnesia
+    #- schema:/var/lib/rabbitmq/schema
     - log:/var/log/rabbitmq
 
 networks:
@@ -45,30 +45,30 @@ networks:
       #- subnet: 2001:3984:3989::/64
 
 volumes:
-  #data:
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/data
+      o: bind
+  #config:
   #  driver: local
   #  driver_opts:
   #    type: none
-  #    device: ${PWD}/data/data
+  #    device: ${PWD}/data/data/config
   #    o: bind
-  config:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/data/config
-      o: bind
-  mnesia:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/data/mnesia
-      o: bind
-  schema:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/data/schema
-      o: bind
+  #mnesia:
+  #  driver: local
+  #  driver_opts:
+  #    type: none
+  #    device: ${PWD}/data/data/mnesia
+  #    o: bind
+  #schema:
+  #  driver: local
+  #  driver_opts:
+  #    type: none
+  #    device: ${PWD}/data/data/schema
+  #    o: bind
   log:
     driver: local
     driver_opts:

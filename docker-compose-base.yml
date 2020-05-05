@@ -11,7 +11,7 @@ services:
     environment:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-admin_pass}
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-admin}
-      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-secret_cookie_here}
+      #RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-secret_cookie_here}
       RABBITMQ_VM_MEMORY_HIGH_WATERMARK: ${RABBITMQ_VM_MEMORY_HIGH_WATERMARK:-0.60}
       # You cannot use dots in RABBITMQ_NODENAME. This restriction is inherited from Erlang. You can use dashes and underscores.
       RABBITMQ_NODENAME: ${RABBITMQ_NODENAME:-standalone_rabbitmq}
